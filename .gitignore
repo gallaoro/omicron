@@ -1,2 +1,5 @@
-#escudi il file contenente il token di accesso
-token.txt
+#exclude directory containig tokens
+tokens/
+
+#exclude everything thath ends with ~
+*~
