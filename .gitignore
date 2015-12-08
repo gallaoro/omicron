@@ -1,5 +1,8 @@
 #exclude directory containig tokens
-tokens/
+tokens/telegram-token.txt
 
-#exclude everything thath ends with ~
+#exclude everything that ends with ~
 *~
+
+#exclude everything that ends with .pyc
+*.pyc

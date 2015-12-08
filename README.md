@@ -15,7 +15,7 @@ Compiti
 ### main_controller:
 * Controlla messaggi provenienti da utenti telegram
 * Se trova un messaggio di un nuovo utente crea un thread per gestire la chat con quell'utente e inserisce il messaggio nella telegram_messages_queue
-* Se trova un messaggio di un utente già conosciuto inserisce il messaggio nella coda telegram_messages_queue  
+* Se trova un messaggio di un utente già conosciuto inserisce il messaggio nella coda telegram_messages_queue
 * Prende una risposta da db e la trasforma in una messaggio interno per alcuni thread
 
 ###user_thread:
