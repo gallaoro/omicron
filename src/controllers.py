@@ -22,9 +22,9 @@ class Userchat_controller(Thread):
                     time.sleep(1)
                 else:
                     print 'thread:'+str(self.chat_id)+' has catched message from:'+str(message.chat_id)
-                    if 'parola' in message.text.lower():
-                        word=db_get_random_word()
-                        question='Quale è il significato di: '+word[0]+'?'
+                    if 'a' in message.text.lower():
+                        question=db_get_random_question()
+                        print question
                         self.bot.sendMessage(chat_id=self.chat_id,text=question)
             else:
                 time.sleep(1)
