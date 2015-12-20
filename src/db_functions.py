@@ -21,5 +21,5 @@ def db_get_random_question():
 
     cur.execute('SELECT * FROM QUESTIONS')
     
-    return random.choice(cur.fetchall())[1]
+    return random.choice(cur.fetchall())
 

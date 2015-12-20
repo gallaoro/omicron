@@ -24,6 +24,10 @@ except IndexError:
     LAST_UPDATE_ID = None
 
 messages_queue=Queue()
+internal_queue=Queue()
+
+t=Global_dispatcher_controller(internal_queue)
+t.start()
 
 while True:
     time.sleep(1)
@@ -34,7 +38,7 @@ while True:
             #creates thread for single user chat
             print 'new thread created, name:'+str(update.message.chat_id)
             if update.message.chat.type==u'private':
-                t = Userchat_controller(update.message.chat.id, messages_queue, bot)
+                t = Userchat_controller(update.message.chat.id, messages_queue, bot, internal_queue)
                 t.start()
         else:
             messages_queue.put(update.message)      

@@ -8,11 +8,15 @@ import datetime
 import random
 
 class Userchat_controller(Thread):
-    def __init__(self, chat_id, message_queue, bot):
+    def __init__(self, chat_id, message_queue, bot, internal_queue):
         Thread.__init__(self)
         self.chat_id=chat_id
         self.message_queue=message_queue
         self.bot=bot
+        self.is_waiting_for_answer=False
+        self.last_answer=''
+        self.last_question_id=0
+        self.internal_queue=internal_queue
     def run(self):
         while True:
             if not self.message_queue.empty():
@@ -21,10 +25,26 @@ class Userchat_controller(Thread):
                     self.message_queue.put(message)
                     time.sleep(1)
                 else:
-                    print 'thread:'+str(self.chat_id)+' has catched message from:'+str(message.chat_id)
-                    if 'a' in message.text.lower():
+                    print('thread:'+str(self.chat_id)+' has catched message from:'+str(message.chat_id))
+                    if self.is_waiting_for_answer:
+                        self.last_answer=message.text
+                        self.is_waiting_for_answer=False
+                    elif 'a' in message.text.lower():
                         question=db_get_random_question()
-                        print question
-                        self.bot.sendMessage(chat_id=self.chat_id,text=question)
+                        self.bot.sendMessage(chat_id=self.chat_id,text=question[1])
+                        self.is_waiting_for_answer=True
+                        self.last_question_id=question[0]
             else:
                 time.sleep(1)
+                
+                
+                
+class Global_dispatcher_controller(Thread):
+    def __init__(self,internal_queue):
+        Thread.__init__(self)
+        self.internal_queue=internal_queue
+    def run(self):
+        while True:
+            if not self.internal_queue.empty():
+                time.sleep(1)
+        
