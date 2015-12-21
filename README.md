@@ -6,8 +6,8 @@ Creare un bot telegram che periodicamente invii agli utenti delle domande su gra
 
 To do
 -----
-* Realizzare uno user_thread che prelevi una domanda da db e la invii all'utente
-* Inserire nel main_controller la ricerca nel db di una risposta 
+* ~~Realizzare uno user_thread che prelevi una domanda da db e la invii all'utente~~
+* Realizzare un controller che data una domanda e una risposta chieda ad un utente se è giusta
 * 
 
 Compiti

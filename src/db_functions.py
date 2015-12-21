@@ -13,13 +13,30 @@ def db_init():
     cursor.execute("SET CHARACTER SET utf8;") #same as above
 
     cursor.execute("SET character_set_connection=utf8;") #same as above
-    return cursor
+    return cursor, db
 
 
 def db_get_random_question():
-    cur=db_init()
+    db=db_init()    
+    cur=db[0]
+    db=db[1]
 
     cur.execute('SELECT * FROM QUESTIONS')
+    result=cur.fetchall()
     
-    return random.choice(cur.fetchall())
+    cur.close()
+    db.close()    
+    
+    return random.choice(result)
+
+def db_save_answer(id_question, answer_text):
+    db=db_init()    
+    cur=db[0]
+    db=db[1]
+    
+    cur.execute('INSERT INTO ANSWERS (id_question, answer_text) VALUES('+str(id_question)+',\''+answer_text+'\')')
+    db.commit()
+    
+    cur.close()
+    db.close()
 
