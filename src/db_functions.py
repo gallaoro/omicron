@@ -29,12 +29,14 @@ def db_get_random_question():
     
     return random.choice(result)
 
-def db_save_answer(id_question, answer_text):
+def db_save_answer(id_question, answer_text, id_telegram):
     db=db_init()    
     cur=db[0]
     db=db[1]
     
-    cur.execute('INSERT INTO ANSWERS (id_question, answer_text) VALUES('+str(id_question)+',\''+answer_text+'\')')
+    answer_text=answer_text.replace('"','""') #so you can insert quoted strings
+    
+    cur.execute("INSERT INTO ANSWERS (id_question, answer_text, id_telegram) VALUES("+str(id_question)+",\""+answer_text+"\","+str(id_telegram)+")")
     db.commit()
     
     cur.close()

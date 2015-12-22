@@ -28,8 +28,9 @@ class Userchat_controller(Thread):
                     print('thread:'+str(self.chat_id)+' has catched message from:'+str(message.chat_id))
                     if self.is_waiting_for_answer:
                         self.last_answer=message.text
-                        db_save_answer(self.last_question_id,self.last_answer)
+                        db_save_answer(self.last_question_id,self.last_answer, self.chat_id)
                         self.is_waiting_for_answer=False
+                        self.bot.sendMessage(chat_id=self.chat_id,text='Risposta salvata')
                     elif 'a' in message.text.lower():
                         question=db_get_random_question()
                         self.bot.sendMessage(chat_id=self.chat_id,text=question[1])
