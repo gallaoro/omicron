@@ -42,3 +42,34 @@ def db_save_answer(id_question, answer_text, id_telegram):
     cur.close()
     db.close()
 
+def db_is_new_user(id_telegram):
+    db=db_init()    
+    cur=db[0]
+    db=db[1]
+    
+    cur.execute('SELECT * FROM USERS WHERE id_telegram='+str(id_telegram))
+    
+    result=cur.fetchone()
+    
+    cur.close()
+    db.close()
+    
+    if result==None:
+        return True
+    else:
+        return False
+        
+def db_insert_new_user(id_telegram, user_name):
+    db=db_init()    
+    cur=db[0]
+    db=db[1]
+    
+    user_name=user_name.replace('"','""') #so you can insert quoted strings
+    
+    cur.execute("INSERT INTO USERS (id_telegram, name) VALUES("+str(id_telegram)+",\""+user_name+"\")")
+    db.commit()
+    
+    cur.close()
+    db.close()
+    
+
