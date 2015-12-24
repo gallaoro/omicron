@@ -72,4 +72,24 @@ def db_insert_new_user(id_telegram, user_name):
     cur.close()
     db.close()
     
+def db_get_random_answer():
+    db=db_init()    
+    cur=db[0]
+    db=db[1]
 
+    cur.execute('SELECT * FROM ANSWERS')
+    tmp=cur.fetchall()
+    tmp=random.choice(tmp)
+    
+    result=[]
+    result.append(tmp[3])
+    
+    cur.execute('SELECT * FROM QUESTIONS WHERE id_question='+str(tmp[1]))
+    tmp=cur.fetchone()
+    
+    result.append(tmp[1])
+    
+    cur.close()
+    db.close()    
+    
+    return result
