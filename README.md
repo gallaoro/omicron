@@ -13,8 +13,8 @@ Tasks
 -------
 ### main_controller:
 * Controls messages from users
-** If finds a message from a new user creates a thread to manage the chat with that user end inserts the messages in the *telegram_messages_queue*
-** If finds a message from a known user just inserts the message in the *telegram_messages_queue*
+* * If finds a message from a new user creates a thread to manage the chat with that user end inserts the messages in the *telegram_messages_queue*
+* * If finds a message from a known user just inserts the message in the *telegram_messages_queue*
 
 ###user_thread:
 * Controls the *telegram_messages_queue* for messages for himself
