@@ -1,26 +1,22 @@
 # omicron
 
-Obiettivo
+Porpouse
 ---------
-Creare un bot telegram che periodicamente invii agli utenti delle domande su grammatica e affini
+Create a telegram bot which periodically sends to users questions about grammar
 
 To do
 -----
-* ~~Realizzare uno user_thread che prelevi una domanda da db e la invii all'utente~~
-* Realizzare un controller che data una domanda e una risposta chieda ad un utente se è giusta
-* 
+* ~~Create a user-thread which retrieve a question from db and sends to the user~~
+* Create a controller which given a question and an answer asks to a user if it's correct
 
-Compiti
+Tasks
 -------
 ### main_controller:
-* Controlla messaggi provenienti da utenti telegram
-* Se trova un messaggio di un nuovo utente crea un thread per gestire la chat con quell'utente e inserisce il messaggio nella telegram_messages_queue
-* Se trova un messaggio di un utente già conosciuto inserisce il messaggio nella coda telegram_messages_queue
-* Prende una risposta da db e la trasforma in una messaggio interno per alcuni thread
+* Controls messages from users
+** If finds a message from a new user creates a thread to manage the chat with that user end inserts the messages in the *telegram_messages_queue*
+** If finds a message from a known user just inserts the message in the *telegram_messages_queue*
 
 ###user_thread:
-* Controlla la coda telegram_messages_queue per messaggi per se stesso
-* Accede al db per scegliere una domanda e inviarla all'utente
-* Aspetta una risposta alla domanda fatta e la inserisce ne db
-* Controlla la internal_messages_queue per messaggi da inoltrare nella chat(risposte da correggere)
-
+* Controls the *telegram_messages_queue* for messages for himself
+* Access the db to choose a question and send to the user
+* Waits for an answer to the given question and saves in the db
